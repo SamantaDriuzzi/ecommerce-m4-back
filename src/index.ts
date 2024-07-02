@@ -7,6 +7,9 @@ import { preLoadProducts } from "./helpers/preLoadProducts";
 
 const initialize = async () => {
     console.log("Initializing server");
+    const databaseUrl = process.env.DATABASE_URL;
+    AppDataSource.setOptions({ url: databaseUrl, ssl: { rejectUnauthorized: false } });
+    
     await AppDataSource.initialize();
     console.log("Database initialized");
     await preLoadCategories();
